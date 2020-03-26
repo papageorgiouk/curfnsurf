@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/palette_purple</color>
+    <color name="colorPrimaryDark">@color/palette_purple</color>
+    <color name="colorAccent">@color/palette_yellow</color>
+
+    <color name="palette_purple">#7189bf</color>
+    <color name="palette_pink">#df7599</color>
+    <color name="palette_yellow">#ffc785</color>
+    <color name="palette_green">#72d6c9</color>
+</resources>

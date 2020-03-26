@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.papageorgiouk.curfnsurf.ui.form.purpose.PurposeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/purpose_fragment" >
+        <action
+            android:id="@+id/action_purpose_to_id"
+            app:destination="@id/idFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.papageorgiouk.curfnsurf.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.papageorgiouk.curfnsurf.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/idFragment"
+        android:name="com.papageorgiouk.curfnsurf.ui.form.id.IdFragment"
+        android:label="id_fragment"
+        tools:layout="@layout/id_fragment" >
+        <action
+            android:id="@+id/action_id_to_postcode"
+            app:destination="@id/postCodeFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"/>
+    </fragment>
+    <fragment
+        android:id="@+id/postCodeFragment"
+        android:name="com.papageorgiouk.curfnsurf.ui.form.postcode.PostCodeFragment"
+        tools:layout="@layout/post_code_fragment"
+        android:label="PostCodeFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.papageorgiouk.curfnsurf.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+</navigation>

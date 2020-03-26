@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Curf n Surf</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="purpose_1">Visit to a pharmacy, blood donation center or a doctor</string>
+    <string name="purpose_2">Visit to a store to buy essential goods / services</string>
+    <string name="purpose_3">Visit to a bank, provided that electronic transactions are not possible</string>
+    <string name="purpose_4">Absolutely necessary visits to government services or services of the wider public sector and local government</string>
+    <string name="purpose_5">Movement with the purpose of assisting people who are unable to serve or protect themselves or who are in self-confinement and / or compulsory confinement (quarantine)</string>
+    <string name="purpose_6">Movement for physical activity or for the needs of a pet, alone or in a group of no more than 2 persons and in areas adjacent to their homes</string>
+    <string name="purpose_7">Movement with the purpose of attending a ceremony (e.g. funeral, wedding, christening) of first and second degree relatives not exceeding 10 persons</string>
+    <string name="purpose_8">Movement for any other purpose which may be justified under the prohibition of movement measures</string>
+
+    <string name="ask_purpose">What\s your purpose for leaving home?</string>
+    <string name="id_number_hint">Number</string>
+    <string name="post_code_hint">Post code</string>
+    <string name="send">Send</string>
+    <string name="error_needs_to_be_number">Needs to be a number</string>
+    <string name="cant_be_empty">Can\'t be empty</string>
+
+    <string-array name="screen_titles">
+        <item>Purpose</item>
+        <item>ID or passport</item>
+        <item>Post code</item>
+    </string-array>
+</resources>
