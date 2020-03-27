@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.textfield.TextInputEditText
 import com.papageorgiouk.curfnsurf.R
 import com.papageorgiouk.curfnsurf.ui.inputOk
 import kotlinx.android.synthetic.main.id_fragment.*
