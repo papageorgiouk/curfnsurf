@@ -1,7 +1,7 @@
 package com.papageorgiouk.curfnsurf.ui
 
-import android.view.View
 import android.widget.EditText
+import androidx.viewpager2.widget.ViewPager2
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.coroutineScope
@@ -29,3 +29,9 @@ fun <A, B: Any, R> Flow<A>.withLatestFrom(other: Flow<B>, transform: suspend (A,
 }
 
 fun EditText.inputOk() = !this.text.isNullOrBlank()
+
+fun ViewPager2.hasBackStack() = this.currentItem > 0
+
+fun ViewPager2.popBackStack() {
+    this.currentItem = this.currentItem - 1
+}

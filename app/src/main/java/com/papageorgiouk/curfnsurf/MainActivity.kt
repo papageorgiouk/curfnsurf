@@ -19,6 +19,8 @@ import com.papageorgiouk.curfnsurf.data.FormState
 import com.papageorgiouk.curfnsurf.ui.form.id.IdFragment
 import com.papageorgiouk.curfnsurf.ui.form.postcode.PostCodeFragment
 import com.papageorgiouk.curfnsurf.ui.form.purpose.PurposeFragment
+import com.papageorgiouk.curfnsurf.ui.hasBackStack
+import com.papageorgiouk.curfnsurf.ui.popBackStack
 import com.papageorgiouk.curfnsurf.ui.withLatestFrom
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collect
@@ -120,6 +122,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun end() {
 
+    }
+
+
+    override fun onBackPressed() {
+        if (pager.hasBackStack()) pager.popBackStack()
+        else super.onBackPressed()
     }
 }
 
