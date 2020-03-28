@@ -5,11 +5,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.lifecycleScope
 import cafe.adriel.krumbsview.model.Krumb
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.papageorgiouk.curfnsurf.data.FormManager
 import com.papageorgiouk.curfnsurf.data.FormState
 import com.papageorgiouk.curfnsurf.ui.*
@@ -21,6 +23,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.viewmodel.ext.android.viewModel
 import reactivecircus.flowbinding.android.view.clicks
+
 
 internal const val SMS_NUMBER = 8998
 
@@ -109,6 +112,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.options, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.option_notices -> {
+                OssLicensesMenuActivity.setActivityTitle("Licenses")
+                startActivity(Intent(this, OssLicensesMenuActivity::class.java))
+            }
+        }
+
         return true
     }
 }

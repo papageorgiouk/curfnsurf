@@ -11,6 +11,11 @@
 
     </style>
 
+    <style name="LicensesTheme" parent="Theme.MaterialComponents">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
     <style name="TextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/text_main_color</item>
         <item name="android:textColorHint">@color/text_main_color</item>
