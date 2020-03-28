@@ -5,7 +5,7 @@ import com.papageorgiouk.curfnsurf.data.FormManager
 
 class PostCodeViewModel(private val formManager: FormManager) : ViewModel() {
 
-    fun setPostCode(postCode: Int) {
+    fun setPostCode(postCode: Long) {
         formManager.postCode = postCode
     }
 
