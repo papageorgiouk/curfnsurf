@@ -12,7 +12,7 @@ import com.papageorgiouk.curfnsurf.ui.form.id.IdFragment
 import com.papageorgiouk.curfnsurf.ui.form.postcode.PostCodeFragment
 import com.papageorgiouk.curfnsurf.ui.form.purpose.PurposeFragment
 
-class FormFragmentsAdapter(fm: FragmentManager, lifecycle: Lifecycle, val onNext: (() -> Unit)) : FragmentStateAdapter(fm, lifecycle) {
+class FormFragmentsAdapter(fm: FragmentManager, lifecycle: Lifecycle, private val onNext: (() -> Unit)) : FragmentStateAdapter(fm, lifecycle) {
 
     override fun getItemCount(): Int = 3
 
