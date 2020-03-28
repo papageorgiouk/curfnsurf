@@ -6,9 +6,15 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.papageorgiouk.curfnsurf.R
 import kotlinx.android.synthetic.main.id_fragment.*
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.android.viewmodel.ext.android.viewModel
+import reactivecircus.flowbinding.android.widget.editorActionEvents
+import reactivecircus.flowbinding.android.widget.textChanges
 
 class IdFragment(val onNext: (() -> Unit)) : Fragment(R.layout.id_fragment) {
 
@@ -17,14 +23,17 @@ class IdFragment(val onNext: (() -> Unit)) : Fragment(R.layout.id_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        input_id.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+        input_id.editorActionEvents {
+            return@editorActionEvents if (it.actionId == EditorInfo.IME_ACTION_NEXT) {
                 onNext()
-                return@setOnEditorActionListener true
-            }
+                true
+            } else false
+        }.launchIn(lifecycleScope)
 
-            false
-        }
+        input_id.textChanges(true)
+            .debounce(200)
+            .onEach { viewModel.id = it.toString() }
+            .launchIn(lifecycleScope)
     }
 
     override fun onResume() {

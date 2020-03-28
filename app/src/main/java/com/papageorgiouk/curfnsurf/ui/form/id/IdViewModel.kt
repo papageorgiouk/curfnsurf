@@ -5,8 +5,10 @@ import com.papageorgiouk.curfnsurf.data.FormManager
 
 class IdViewModel(private val formManager: FormManager) : ViewModel() {
 
-    fun onIdSet(id: String) {
-        formManager.id = id
-    }
+    var id: String? = null
+        set(value) {
+            field = value
+            formManager.id = value
+        }
 
 }
