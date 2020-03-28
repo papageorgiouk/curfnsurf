@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.widget.ViewPager2
 import cafe.adriel.krumbsview.model.Krumb
 import com.papageorgiouk.curfnsurf.data.Form
 import com.papageorgiouk.curfnsurf.data.FormManager
@@ -41,22 +40,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         }
 
-        pager.adapter = pagerAdapter
-        pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-
-            private var previousSelected: Int = -1
-
-            override fun onPageSelected(position: Int) {
+        pager.apply {
+            adapter = pagerAdapter
+            directionalNavigationListener(this@MainActivity) { direction, position ->
                 handleButton(position)
-                val isBack = position < previousSelected
-                val isForward = position > previousSelected
 
-                previousSelected = position
-
-                if (isBack) onScrolledBack(position)
-                else if (isForward)  onScrolledForward(position)
+                when (direction) {
+                    Direction.BACK -> onScrolledBack(position)
+                    Direction.FORWARD -> onScrolledForward(position)
+                }
             }
-        })
+        }
 
         krumbs.setOnPreviousItemClickListener { moveBack() }
     }
@@ -70,8 +64,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun handleButton(position: Int) {
         when (position) {
-            0 -> btn_send.hideMove()
-            else -> btn_send.showMove()
+            2 -> btn_send.showMove()
+            else -> btn_send.hideMove()
         }
     }
 
