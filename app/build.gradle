@@ -74,4 +74,9 @@ dependencies {
     //  krumbs
     implementation 'com.github.adrielcafe:krumbsview:1.1.3'
 
+    //  crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta02'
 }
+
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
