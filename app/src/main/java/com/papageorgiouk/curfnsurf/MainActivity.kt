@@ -1,29 +1,31 @@
 package com.papageorgiouk.curfnsurf
 
+import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.lifecycleScope
 import cafe.adriel.krumbsview.model.Krumb
-import com.papageorgiouk.curfnsurf.data.Form
 import com.papageorgiouk.curfnsurf.data.FormManager
 import com.papageorgiouk.curfnsurf.data.FormState
 import com.papageorgiouk.curfnsurf.ui.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import org.koin.android.viewmodel.ext.android.viewModel
+import reactivecircus.flowbinding.android.view.clicks
 
 internal const val SMS_NUMBER = 8998
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private val formManager by inject<FormManager>()
-
-    private val screenTitles by lazy { resources.getStringArray(R.array.screen_titles)}
+    private val viewModel by viewModel<MainViewModel>()
 
     private val pagerAdapter by lazy { FormFragmentsAdapter(supportFragmentManager, this.lifecycle) { moveForward() } }
 
@@ -32,18 +34,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 
-        lifecycleScope.launch {
-
-            formManager.observeSend()
-                .withLatestFrom(formManager.observeForm()) { _, formState -> formState }
-                .collect { handleFormState(it) }
-
-        }
-
         pager.apply {
             adapter = pagerAdapter
             directionalNavigationListener(this@MainActivity) { direction, position ->
-                handleButton(position)
+                handleButtonVisibility(position)
 
                 when (direction) {
                     Direction.BACK -> onScrolledBack(position)
@@ -53,25 +47,28 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
 
         krumbs.setOnPreviousItemClickListener { moveBack() }
+
+        btn_send.clicks()
+            .debounce(200)
+            .onEach { viewModel.onSend() }
+            .launchIn(lifecycleScope)
+
+        viewModel.smsReadyChannel
+            .asFlow()
+            .onEach { sendSms(it) }
+            .launchIn(lifecycleScope)
     }
 
-    private fun handleFormState(state: FormState) {
-        when (state) {
-            is FormState.Complete -> sendSms(state.form)
-        }
-
-    }
-
-    private fun handleButton(position: Int) {
+    private fun handleButtonVisibility(position: Int) {
         when (position) {
             2 -> btn_send.showMove()
             else -> btn_send.hideMove()
         }
     }
 
-    private fun sendSms(form: Form) {
+    private fun sendSms(sms: String) {
         val intent= Intent(Intent.ACTION_VIEW, Uri.parse("smsto:$SMS_NUMBER"))
-            .apply { putExtra("sms_body", form.toSms()) }
+            .apply { putExtra("sms_body", sms) }
 
         startActivity(intent)
     }
@@ -81,33 +78,46 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun moveForward() {
-        if (pager.currentItem == pagerAdapter.itemCount - 1) end()
+        if (pager.currentItem == pagerAdapter.itemCount - 1) end()  //  counts as "Send"
         else pager.setCurrentItem(pager.currentItem + 1, true)
     }
 
     private fun onScrolledBack(position: Int) {
         //  if we scrolled from the viewpager, we need to remove the last item from the krumbs
         //  if the krumb was clicked, then the last one was automatically removed so we do nothing
-        if (krumbs.getCurrentItem()?.title != screenTitles[position]) { krumbs.removeLastItem() }
-        Log.d("Krumbs", "items are now: ${krumbs.getItems().map { it.title }}")
-
+        if (krumbs.getCurrentItem()?.title != viewModel.screenTitles[position]) { krumbs.removeLastItem() }
     }
 
     private fun onScrolledForward(position: Int) {
-        val title = screenTitles[position]
-//        Log.d("Krumbs", "adding $title item to ${krumbs.getItems().map { it.title }}")
+        val title = viewModel.screenTitles[position]
         krumbs.addItem(Krumb(title))
-        Log.d("Krumbs", "items are now: ${krumbs.getItems().map { it.title }}")
 
     }
 
     private fun end() {
-
+        btn_send.callOnClick()
     }
-
 
     override fun onBackPressed() {
         if (pager.hasBackStack()) pager.popBackStack()
         else super.onBackPressed()
     }
 }
+
+class MainViewModel(app: Application, val formManager: FormManager) : AndroidViewModel(app) {
+
+    val screenTitles: Array<String> by lazy { app.resources.getStringArray(R.array.screen_titles)}
+
+    val smsReadyChannel = BroadcastChannel<String>(1)
+
+    suspend fun onSend() {
+        val formState = formManager.getFormState()
+
+        if (formState is FormState.Complete) {
+            val sms = formState.form.toSms()
+            smsReadyChannel.send(sms)
+        }
+    }
+
+}
+

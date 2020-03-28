@@ -1,45 +1,50 @@
 package com.papageorgiouk.curfnsurf.data
 
+import android.content.Context
+import com.papageorgiouk.curfnsurf.R
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.flow.asFlow
 
-class FormManager {
+@FlowPreview
+@ExperimentalCoroutinesApi
+class FormManager(private val context: Context) {
 
     var purpose: Purpose? = null
         set(value) {
             field = value
-            check()
+            update()
         }
-    var postCode: Int? = null
+    var postCode: Long? = null
         set(value) {
             field = value
-            check()
+            update()
         }
     var id: String? = null
         set(value) {
             field = value
-            check()
+            update()
         }
+
+
+    fun getFormState(): FormState {
+        return if (purpose == null || postCode == null || id == null) {
+            FormState.Incomplete(context.getString(R.string.form_null_msg))
+        }
+        else FormState.Complete(Form(purpose!!, postCode!!, id!!))
+    }
 
     private val stateBroadcastChannel = BroadcastChannel<FormState>(1)
 
-    private val onSendBroadcastChannel = BroadcastChannel<Unit>(1)
-
-    fun onSendClicked() {
-        onSendBroadcastChannel.sendBlocking(Unit)
-    }
-
-    private fun check() {
-        val state = if (purpose  == null || postCode == null || id == null) FormState.Incomplete("Some null data")
-        else FormState.Complete(Form(purpose!!, postCode!!, id!!))
+    private fun update() {
+        val state = getFormState()
 
         stateBroadcastChannel.sendBlocking(state)
     }
 
-    fun observeForm() = stateBroadcastChannel.asFlow()
-
-    fun observeSend() = onSendBroadcastChannel.asFlow()
+    fun observeFormStatus() = stateBroadcastChannel.asFlow()
 
 }
 
@@ -50,7 +55,7 @@ sealed class FormState {
 
 data class Form(
     val purpose: Purpose,
-    val postCode: Int,
+    val postCode: Long,
     val id: String
 ) {
     fun toSms() = "${purpose.number} $id $postCode"

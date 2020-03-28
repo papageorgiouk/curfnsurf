@@ -15,7 +15,9 @@ val appModule = module {
 
     single { PurposeProvider(androidContext()) }
 
-    single { FormManager() }
+    single { FormManager(androidContext()) }
+
+    viewModel { MainViewModel(get(), get()) }
 
     viewModel { PurposeViewModel(get(), get()) }
 
