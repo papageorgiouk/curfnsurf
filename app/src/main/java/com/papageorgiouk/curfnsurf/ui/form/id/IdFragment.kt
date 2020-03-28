@@ -40,7 +40,7 @@ class IdFragment(val onNext: (() -> Unit)) : Fragment(R.layout.id_fragment) {
         super.onResume()
 
         if (input_id.requestFocus()) {
-            val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(input_id, InputMethodManager.SHOW_IMPLICIT)
         }
     }
