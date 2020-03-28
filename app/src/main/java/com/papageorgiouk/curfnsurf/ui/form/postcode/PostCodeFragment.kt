@@ -8,30 +8,30 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.papageorgiouk.curfnsurf.R
-import com.papageorgiouk.curfnsurf.ui.inputOk
 import kotlinx.android.synthetic.main.post_code_fragment.*
 import kotlinx.coroutines.flow.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import reactivecircus.flowbinding.android.widget.editorActionEvents
 import reactivecircus.flowbinding.android.widget.textChanges
 
-class PostCodeFragment(private val onNext: (() -> Unit)) : Fragment(R.layout.post_code_fragment) {
+class PostCodeFragment(private val onSend: (() -> Unit)) : Fragment(R.layout.post_code_fragment) {
 
     private val viewModel: PostCodeViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        input_post_code.setOnEditorActionListener { v, actionId, _ ->
-            when (actionId) {
-                EditorInfo.IME_ACTION_DONE -> {
-                    if (input_post_code.inputOk()) onNext()
-                    else input_post_code.error = getString(R.string.cant_be_empty)
-
-                    false
+        input_post_code.editorActionEvents {
+            if (it.actionId == EditorInfo.IME_ACTION_SEND) {
+                if (input_post_code.text.isNullOrBlank()) {
+                    box_postcode.error = getString(R.string.cant_be_empty)
+                    return@editorActionEvents false
                 }
-                else -> false
-            }
-        }
+                onSend()
+                return@editorActionEvents true
+            } else return@editorActionEvents false
+        }.debounce(200)
+            .launchIn(lifecycleScope)
 
         input_post_code.textChanges(true)
             .debounce(200)
