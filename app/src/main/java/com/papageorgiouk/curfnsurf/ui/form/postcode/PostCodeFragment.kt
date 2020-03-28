@@ -6,10 +6,13 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.papageorgiouk.curfnsurf.R
 import com.papageorgiouk.curfnsurf.ui.inputOk
 import kotlinx.android.synthetic.main.post_code_fragment.*
+import kotlinx.coroutines.flow.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import reactivecircus.flowbinding.android.widget.textChanges
 
 class PostCodeFragment(private val onNext: (() -> Unit)) : Fragment(R.layout.post_code_fragment) {
 
@@ -30,20 +33,14 @@ class PostCodeFragment(private val onNext: (() -> Unit)) : Fragment(R.layout.pos
             }
         }
 
-//        btn_send.setOnClickListener {
-//            if (input_post_code.inputOk()) {
-//                try {
-//                    val parsedPostcode = input_post_code.text.toString().toInt()
-//                    viewModel.setPostCode(parsedPostcode)
-//                    viewModel.onSend()
-//                } catch (e: NumberFormatException) {
-//                    input_post_code.error = getString(R.string.error_needs_to_be_number)
-//                }
-//            } else {
-//                input_post_code.error = getString(R.string.cant_be_empty)
-//            }
-//
-//        }
+        input_post_code.textChanges(true)
+            .debounce(200)
+            .filterNotNull()
+            .map { it.toString().toInt() }
+            .catch {  }
+            .onEach { viewModel.setPostCode(it) }
+            .launchIn(lifecycleScope)
+
     }
 
     override fun onResume() {
