@@ -6,22 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import cafe.adriel.krumbsview.model.Krumb
 import com.papageorgiouk.curfnsurf.data.Form
 import com.papageorgiouk.curfnsurf.data.FormManager
 import com.papageorgiouk.curfnsurf.data.FormState
-import com.papageorgiouk.curfnsurf.ui.form.id.IdFragment
-import com.papageorgiouk.curfnsurf.ui.form.postcode.PostCodeFragment
-import com.papageorgiouk.curfnsurf.ui.form.purpose.PurposeFragment
-import com.papageorgiouk.curfnsurf.ui.hasBackStack
-import com.papageorgiouk.curfnsurf.ui.popBackStack
-import com.papageorgiouk.curfnsurf.ui.withLatestFrom
+import com.papageorgiouk.curfnsurf.ui.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -35,7 +26,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val screenTitles by lazy { resources.getStringArray(R.array.screen_titles)}
 
-    private val pagerAdapter by lazy { FragmentsAdapter(supportFragmentManager, this.lifecycle) { moveForward() } }
+    private val pagerAdapter by lazy { FormFragmentsAdapter(supportFragmentManager, this.lifecycle) { moveForward() } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,19 +46,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
             private var previousSelected: Int = -1
 
-            override fun onPageScrollStateChanged(state: Int) {
-                super.onPageScrollStateChanged(state)
-            }
-
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-            }
-
             override fun onPageSelected(position: Int) {
+                handleButton(position)
                 val isBack = position < previousSelected
                 val isForward = position > previousSelected
 
@@ -88,6 +68,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     }
 
+    private fun handleButton(position: Int) {
+        when (position) {
+            0 -> btn_send.hideMove()
+            else -> btn_send.showMove()
+        }
+    }
+
     private fun sendSms(form: Form) {
         val intent= Intent(Intent.ACTION_VIEW, Uri.parse("smsto:$SMS_NUMBER"))
             .apply { putExtra("sms_body", form.toSms()) }
@@ -101,7 +88,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun moveForward() {
         if (pager.currentItem == pagerAdapter.itemCount - 1) end()
-        else pager.currentItem = pager.currentItem + 1
+        else pager.setCurrentItem(pager.currentItem + 1, true)
     }
 
     private fun onScrolledBack(position: Int) {
@@ -129,19 +116,4 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         if (pager.hasBackStack()) pager.popBackStack()
         else super.onBackPressed()
     }
-}
-
-class FragmentsAdapter(fm: FragmentManager, lifecycle: Lifecycle, val onNext: (() -> Unit)) : FragmentStateAdapter(fm, lifecycle) {
-
-    override fun getItemCount(): Int = 3
-
-    override fun createFragment(position: Int): Fragment {
-        return when (position) {
-            0 -> PurposeFragment(onNext)
-            1 -> IdFragment(onNext)
-            2 -> PostCodeFragment(onNext)
-            else -> throw IllegalStateException("Invalid viewpager position")
-        }
-    }
-
 }

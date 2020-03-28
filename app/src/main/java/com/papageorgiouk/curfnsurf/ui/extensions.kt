@@ -1,7 +1,8 @@
 package com.papageorgiouk.curfnsurf.ui
 
 import android.widget.EditText
-import androidx.viewpager2.widget.ViewPager2
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.coroutineScope
@@ -30,8 +31,21 @@ fun <A, B: Any, R> Flow<A>.withLatestFrom(other: Flow<B>, transform: suspend (A,
 
 fun EditText.inputOk() = !this.text.isNullOrBlank()
 
-fun ViewPager2.hasBackStack() = this.currentItem > 0
-
-fun ViewPager2.popBackStack() {
-    this.currentItem = this.currentItem - 1
+fun ExtendedFloatingActionButton.hideMove() {
+    this.hide()
+    this.animate()
+        .setInterpolator(FastOutSlowInInterpolator())
+        .setDuration(300)
+        .translationY(500F)
+        .start()
 }
+
+fun ExtendedFloatingActionButton.showMove() {
+    this.show()
+    this.animate()
+        .setInterpolator(FastOutSlowInInterpolator())
+        .setDuration(200)
+        .translationY(0F)
+        .start()
+}
+

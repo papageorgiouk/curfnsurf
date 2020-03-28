@@ -8,4 +8,6 @@
     <color name="palette_pink">#df7599</color>
     <color name="palette_yellow">#ffc785</color>
     <color name="palette_green">#72d6c9</color>
+
+    <color name="text_main_color">#fafafa</color>
 </resources>

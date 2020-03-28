@@ -14,7 +14,7 @@
     <string name="purpose_8">Movement for any other purpose which may be justified under the prohibition of movement measures</string>
 
     <string name="ask_purpose">What\s your purpose for leaving home?</string>
-    <string name="id_number_hint">Number</string>
+    <string name="id_number_hint">ID or Passport</string>
     <string name="post_code_hint">Post code</string>
     <string name="send">Send</string>
     <string name="error_needs_to_be_number">Needs to be a number</string>

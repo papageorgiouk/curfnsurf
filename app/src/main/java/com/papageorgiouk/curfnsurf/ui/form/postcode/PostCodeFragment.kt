@@ -1,8 +1,10 @@
 package com.papageorgiouk.curfnsurf.ui.form.postcode
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.papageorgiouk.curfnsurf.R
 import com.papageorgiouk.curfnsurf.ui.inputOk
@@ -28,20 +30,28 @@ class PostCodeFragment(private val onNext: (() -> Unit)) : Fragment(R.layout.pos
             }
         }
 
-        btn_send.setOnClickListener {
-            if (input_post_code.inputOk()) {
-                try {
-                    val parsedPostcode = input_post_code.text.toString().toInt()
-                    viewModel.setPostCode(parsedPostcode)
-                    viewModel.onSend()
-                } catch (e: NumberFormatException) {
-                    input_post_code.error = getString(R.string.error_needs_to_be_number)
-                }
-            } else {
-                input_post_code.error = getString(R.string.cant_be_empty)
-            }
-
-        }
+//        btn_send.setOnClickListener {
+//            if (input_post_code.inputOk()) {
+//                try {
+//                    val parsedPostcode = input_post_code.text.toString().toInt()
+//                    viewModel.setPostCode(parsedPostcode)
+//                    viewModel.onSend()
+//                } catch (e: NumberFormatException) {
+//                    input_post_code.error = getString(R.string.error_needs_to_be_number)
+//                }
+//            } else {
+//                input_post_code.error = getString(R.string.cant_be_empty)
+//            }
+//
+//        }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (input_post_code.requestFocus()) {
+            val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(input_post_code, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
 }
