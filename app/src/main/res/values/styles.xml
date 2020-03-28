@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorControlActivated">@color/text_main_color</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
 
     </style>
 
@@ -19,6 +20,11 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">64dp</item>
         <item name="android:layout_marginBottom">32dp</item>
+    </style>
+
+    <style name="OverflowButtonStyle" parent="android:style/Widget.Material.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_info_outline</item>
+        <item name="android:background">?android:attr/actionBarItemBackground</item>
     </style>
 
 </resources>
