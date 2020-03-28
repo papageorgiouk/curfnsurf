@@ -40,7 +40,8 @@ android {
 ext.versions =  [
     lifecycle: '2.2.0',
     coroutines: '1.3.5',
-    koin: '2.1.5'
+    koin: '2.1.5',
+    flowbinding: '0.10.2',
 ]
 
 dependencies {
@@ -68,7 +69,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
 
     //  flowbinding
-    implementation "io.github.reactivecircus.flowbinding:flowbinding-android:0.10.2"
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-android:${versions.flowbinding}"
 
     //  krumbs
     implementation 'com.github.adrielcafe:krumbsview:1.1.3'
