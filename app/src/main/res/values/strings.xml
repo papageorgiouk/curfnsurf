@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Curf n Surf</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 
     <string name="purpose_1">Visit to a pharmacy, blood donation center or a doctor</string>
     <string name="purpose_2">Visit to a store to buy essential goods / services</string>
