@@ -27,6 +27,11 @@
             app:layout_scrollFlags="scroll|enterAlways"
             >
 
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"/>
+
             <cafe.adriel.krumbsview.KrumbsView
                 android:id="@+id/krumbs"
                 android:layout_width="match_parent"
