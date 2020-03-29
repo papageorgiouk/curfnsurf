@@ -18,6 +18,8 @@
     <string name="cant_be_empty">Can\'t be empty</string>
     <string name="form_null_msg">Please complete all form fields</string>
 
+    <string name="about">About</string>
+
     <string-array name="screen_titles">
         <item>Purpose</item>
         <item>ID or passport</item>

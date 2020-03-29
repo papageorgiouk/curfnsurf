@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.papageorgiouk.curfnsurf.ui.widget.ElasticDragDismissFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content_card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:elevation="16dp"
+    app:dragDismissDistance="112dp"
+    app:dragDismissScale="0.95"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/about_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+
+</com.papageorgiouk.curfnsurf.ui.widget.ElasticDragDismissFrameLayout>
