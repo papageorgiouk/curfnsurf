@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import com.papageorgiouk.curfnsurf.R
 import com.papageorgiouk.curfnsurf.data.Purpose
 import kotlinx.android.synthetic.main.purpose_fragment.*
