@@ -1,10 +1,12 @@
 package com.papageorgiouk.curfnsurf
 
+import android.app.ActivityOptions
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +14,7 @@ import cafe.adriel.krumbsview.model.Krumb
 import com.papageorgiouk.curfnsurf.data.FormManager
 import com.papageorgiouk.curfnsurf.data.FormState
 import com.papageorgiouk.curfnsurf.ui.*
+import com.papageorgiouk.curfnsurf.ui.about.AboutActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.flow.asFlow
@@ -20,6 +23,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.viewmodel.ext.android.viewModel
 import reactivecircus.flowbinding.android.view.clicks
+
 
 internal const val SMS_NUMBER = 8998
 
@@ -33,6 +37,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
 
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         pager.apply {
             adapter = pagerAdapter
@@ -57,6 +65,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             .asFlow()
             .onEach { sendSms(it) }
             .launchIn(lifecycleScope)
+
+        btn_info.clicks()
+            .debounce(200)
+            .onEach { startAboutActivity() }
+            .launchIn(lifecycleScope)
+    }
+
+    private fun startAboutActivity() {
+        val intent  = Intent(this, AboutActivity::class.java)
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
     }
 
     private fun handleButtonVisibility(position: Int) {
@@ -102,6 +120,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         if (pager.hasBackStack()) pager.popBackStack()
         else super.onBackPressed()
     }
+
 }
 
 class MainViewModel(app: Application, val formManager: FormManager) : AndroidViewModel(app) {

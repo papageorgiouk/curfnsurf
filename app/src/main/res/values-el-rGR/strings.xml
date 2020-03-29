@@ -24,5 +24,6 @@
         <item>Ταυτότητα ή διαβατήριο</item>
         <item>Ταχυδρομικός κώδικας</item>
     </string-array>
+    <string name="about">Πληροφορίες</string>
 
 </resources>

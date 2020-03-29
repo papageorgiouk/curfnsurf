@@ -10,4 +10,7 @@
     <color name="palette_green">#72d6c9</color>
 
     <color name="text_main_color">#fafafa</color>
+    <color name="white_bg_color">#fafafa</color>
+    <color name="text_dark_color">#415c8f</color>
+
 </resources>

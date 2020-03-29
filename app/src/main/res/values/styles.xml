@@ -7,7 +7,26 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorControlActivated">@color/text_main_color</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
 
+    </style>
+
+    <style name="AppTheme.About" parent="AppTheme">
+        <item name="android:windowEnterTransition">@transition/about_enter</item>
+        <item name="android:windowReturnTransition">@transition/about_return</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">#77323232</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="LicensesTheme" parent="Theme.MaterialComponents">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 
     <style name="TextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -19,6 +38,11 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">64dp</item>
         <item name="android:layout_marginBottom">32dp</item>
+    </style>
+
+    <style name="OverflowButtonStyle" parent="android:style/Widget.Material.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_info_outline</item>
+        <item name="android:background">?android:attr/actionBarItemBackground</item>
     </style>
 
 </resources>

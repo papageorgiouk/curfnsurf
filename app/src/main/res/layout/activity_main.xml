@@ -20,12 +20,27 @@
         android:backgroundTint="@android:color/transparent"
         >
 
+        <ImageButton
+            android:id="@+id/btn_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:fitsSystemWindows="false"
+            android:background="?selectableItemBackgroundBorderless"
+            android:layout_gravity="end|top"
+            android:src="@drawable/ic_info_outline"/>
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:layout_collapseMode="pin"
             app:layout_scrollFlags="scroll|enterAlways"
             >
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"/>
 
             <cafe.adriel.krumbsview.KrumbsView
                 android:id="@+id/krumbs"
@@ -59,7 +74,6 @@
         android:clickable="false"
         android:descendantFocusability="beforeDescendants"
         />
-
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btn_send"
