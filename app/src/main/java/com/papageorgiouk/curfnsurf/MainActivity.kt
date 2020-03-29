@@ -39,9 +39,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-
         pager.apply {
             adapter = pagerAdapter
             directionalNavigationListener(this@MainActivity) { direction, position ->
