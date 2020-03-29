@@ -23,8 +23,9 @@
     <string name="about_app_descr">Helper app that automates the process of sending an SMS to declare purpose of movement in Cyprus, while the COVID-19 pandemic measures are in effect. \n\nPlease use responsibly. We all want to survive this.</string>
     <string name="privacy_policy_title">Privacy Policy</string>
     <string name="privacy_policy_body">We don\'t store your data, period.</string>
-    <string name="copyright_footer">© 2020 Κωνσταντίνος Παπαγεωργίου.\nLicensed under the Apache License, Version 2.0</string>
+    <string name="copyright_footer">© 2020 Konstantinos Papageorgiou.\nLicensed under the Apache License, Version 2.0</string>
     <string name="code_on_github">Code on </string>
+    <string name="libs_screen_title">Curf n Surf was created using these libraries:</string>
 
     <string-array name="screen_titles">
         <item>Purpose</item>
