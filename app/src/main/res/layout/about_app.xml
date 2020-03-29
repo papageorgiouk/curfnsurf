@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_dark_color"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Tooltip"
-                    android:text="Code on "
+                    android:text="@string/code_on_github"
                     />
 
                 <ImageView
@@ -92,7 +92,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="THIS IS NOT AN OFFICIAL APP"
+                android:text="@string/not_official"
                 android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:textStyle="bold"
@@ -107,13 +107,13 @@
                 android:textColor="@color/text_dark_color"
                 android:textSize="14sp"
                 android:fontFamily="serif"
-                android:text="Helper app that automates the process of sending an SMS to declare purpose of movement in Cyprus, while the COVID-19 pandemic measures are in effect. \n\nPlease use responsibly. We all want to survive this."
+                android:text="@string/about_app_descr"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Privacy Policy"
+                android:text="@string/privacy_policy_title"
                 android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:textStyle="bold"
@@ -129,7 +129,7 @@
                 android:textColor="@color/text_dark_color"
                 android:textSize="14sp"
                 android:fontFamily="serif"
-                android:text="We don't store your data, period."
+                android:text="@string/privacy_policy_body"
                 />
 
             <TextView
@@ -142,7 +142,7 @@
                 app:autoSizeMaxTextSize="12sp"
                 app:autoSizeMinTextSize="8sp"
                 app:autoSizeStepGranularity="2sp"
-                android:text="© 2020 Konstantinos Papageorgiou.\nLicensed under the Apache License, Version 2.0"
+                android:text="@string/copyright_footer"
                 />
 
         </LinearLayout>
