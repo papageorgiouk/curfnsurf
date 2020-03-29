@@ -5,12 +5,13 @@
     <color name="colorAccent">@color/palette_yellow</color>
 
     <color name="palette_purple">#7189bf</color>
+    <color name="palette_light_purple">#b39ddb</color>
     <color name="palette_pink">#df7599</color>
     <color name="palette_yellow">#ffc785</color>
-    <color name="palette_green">#72d6c9</color>
+    <color name="palette_green">#2e7d32</color>
 
     <color name="text_main_color">#fafafa</color>
     <color name="white_bg_color">#fafafa</color>
-    <color name="text_dark_color">#415c8f</color>
+    <color name="text_dark_color">#424242</color>
 
 </resources>

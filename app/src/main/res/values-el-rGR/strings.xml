@@ -29,7 +29,8 @@
     <string name="about_app_descr">Η εφαρμογή αυτοματοποιεί τη διαδικασία αποστολής μηνύματος για έγκριση μετακίνησης στην Κύπρο, κάτω από τα μέτρα για την αντιμετώπιση της πανδημίας COVID-19.\n\nΠαρακαλώ χρησιμοποιείστε υπεύθυνα. Όλοι θέλουμε να επιβιώσουμε.</string>
     <string name="privacy_policy_title">Πολιτική προστασίας δεδομένων</string>
     <string name="privacy_policy_body">Δεν αποθηκεύουμε τίποτα από τα δεδομένα σας</string>
-    <string name="copyright_footer">© 2020 Konstantinos Papageorgiou.\nLicensed under the Apache License, Version 2.0</string>
+    <string name="copyright_footer">© 2020 Κωνσταντίνος Παπαγεωργίου.\nLicensed under the Apache License, Version 2.0</string>
     <string name="code_on_github">Κώδικας στο </string>
+    <string name="libs_screen_title">Το Curf n Surf δημιουργήθηκε χρησιμοποιώντας τις βιβλιοθήκες αυτές:</string>
 
 </resources>
