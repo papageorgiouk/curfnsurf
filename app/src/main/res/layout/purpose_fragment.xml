@@ -12,6 +12,8 @@
         android:id="@+id/recycler_purposes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layoutAnimation="@anim/list_layout_animation"
+        tools:listitem="@layout/layout_purpose"
         />
 
 </androidx.core.widget.NestedScrollView>
