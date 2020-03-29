@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.entity.Library
@@ -15,6 +16,7 @@ import com.papageorgiouk.curfnsurf.R
 import com.papageorgiouk.curfnsurf.ui.widget.ElasticDragDismissFrameLayout
 import kotlinx.android.synthetic.main.about_activity.*
 import kotlinx.android.synthetic.main.about_app.view.*
+import kotlinx.coroutines.launch
 import java.security.InvalidParameterException
 
 class AboutActivity : AppCompatActivity(R.layout.about_activity) {
@@ -34,7 +36,7 @@ class AboutActivity : AppCompatActivity(R.layout.about_activity) {
             }
         })
 
-        createSwipeablePages()
+        lifecycleScope.launch {  createSwipeablePages() }
 
     }
 
