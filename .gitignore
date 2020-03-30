@@ -86,3 +86,6 @@ lint/tmp/
 
 #macOS
 *.DS_Store
+
+# release folder
+app/release
