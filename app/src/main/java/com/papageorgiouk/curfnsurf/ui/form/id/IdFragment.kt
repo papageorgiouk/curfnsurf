@@ -30,6 +30,8 @@ class IdFragment(val onNext: (() -> Unit)) : Fragment(R.layout.id_fragment) {
             } else false
         }.launchIn(lifecycleScope)
 
+        input_id.setText(viewModel.id)
+
         input_id.textChanges(true)
             .debounce(200)
             .onEach { viewModel.id = it.toString() }

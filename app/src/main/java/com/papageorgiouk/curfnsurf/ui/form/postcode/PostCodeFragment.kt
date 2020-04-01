@@ -33,6 +33,8 @@ class PostCodeFragment(private val onSend: (() -> Unit)) : Fragment(R.layout.pos
         }.debounce(200)
             .launchIn(lifecycleScope)
 
+        input_post_code.setText(viewModel.getPostCode())
+
         input_post_code.textChanges(true)
             .debounce(200)
             .filterNotNull()
