@@ -21,24 +21,26 @@ class PostCodeFragment : FormFragment(R.layout.post_code_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.pcErrorFlow
+            .map { it?.let { getString(it) } }
+            .onEach { box_postcode.error = it }
+            .launchIn(lifecycleScope)
+
         input_post_code.editorActionEvents {
             if (it.actionId == EditorInfo.IME_ACTION_SEND) {
-                if (input_post_code.text.isNullOrBlank()) {
-                    box_postcode.error = getString(R.string.cant_be_empty)
-                    return@editorActionEvents false
+                if (box_postcode.error != null) return@editorActionEvents false
+                else {
+                    proceed()
+                    return@editorActionEvents true
                 }
-                proceed()
-                return@editorActionEvents true
             } else return@editorActionEvents false
         }.debounce(200)
             .launchIn(lifecycleScope)
 
         input_post_code.textChanges(true)
             .debounce(200)
-            .filterNotNull()
-            .filter { it.isNotBlank() }
-            .map { it.toString().toLong() }
-            .onEach { viewModel.setPostCode(it) }
+            .drop(1)  //  first one is always empty, triggered on onCreate
+            .onEach { viewModel.setPostCodeInput(it.toString()) }
             .launchIn(lifecycleScope)
 
     }
