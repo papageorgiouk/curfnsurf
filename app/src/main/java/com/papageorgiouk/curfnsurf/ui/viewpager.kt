@@ -12,15 +12,15 @@ import com.papageorgiouk.curfnsurf.ui.form.id.IdFragment
 import com.papageorgiouk.curfnsurf.ui.form.postcode.PostCodeFragment
 import com.papageorgiouk.curfnsurf.ui.form.purpose.PurposeFragment
 
-class FormFragmentsAdapter(fm: FragmentManager, lifecycle: Lifecycle, private val onNext: (() -> Unit)) : FragmentStateAdapter(fm, lifecycle) {
+class FormFragmentsAdapter(fm: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fm, lifecycle) {
 
     override fun getItemCount(): Int = 3
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> PurposeFragment(onNext)
-            1 -> IdFragment(onNext)
-            2 -> PostCodeFragment(onNext)
+            0 -> PurposeFragment()
+            1 -> IdFragment()
+            2 -> PostCodeFragment()
             else -> throw IllegalStateException("Invalid viewpager position")
         }
     }
@@ -33,7 +33,7 @@ fun ViewPager2.popBackStack() {
     this.currentItem = this.currentItem - 1
 }
 
-fun ViewPager2.directionalNavigationListener(lifecycleOwner: LifecycleOwner, direction: (Direction, Int) -> Unit) {
+inline fun ViewPager2.directionalNavigationListener(lifecycleOwner: LifecycleOwner, crossinline direction: (Direction, Int) -> Unit) {
 
     val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 

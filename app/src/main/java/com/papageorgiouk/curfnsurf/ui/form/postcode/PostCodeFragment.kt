@@ -5,16 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.papageorgiouk.curfnsurf.R
+import com.papageorgiouk.curfnsurf.ui.form.FormFragment
 import kotlinx.android.synthetic.main.post_code_fragment.*
 import kotlinx.coroutines.flow.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import reactivecircus.flowbinding.android.widget.editorActionEvents
 import reactivecircus.flowbinding.android.widget.textChanges
 
-class PostCodeFragment(private val onSend: (() -> Unit)) : Fragment(R.layout.post_code_fragment) {
+class PostCodeFragment : FormFragment(R.layout.post_code_fragment) {
 
     private val viewModel: PostCodeViewModel by viewModel()
 
@@ -27,7 +27,7 @@ class PostCodeFragment(private val onSend: (() -> Unit)) : Fragment(R.layout.pos
                     box_postcode.error = getString(R.string.cant_be_empty)
                     return@editorActionEvents false
                 }
-                onSend()
+                proceed()
                 return@editorActionEvents true
             } else return@editorActionEvents false
         }.debounce(200)
