@@ -14,4 +14,6 @@
     <color name="white_bg_color">#fafafa</color>
     <color name="text_dark_color">#424242</color>
 
+    <color name="colorError">@color/colorAccent</color>
+
 </resources>
