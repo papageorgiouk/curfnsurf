@@ -17,6 +17,7 @@
     <string name="send">Αποστολή</string>
     <string name="error_needs_to_be_number">Πρέπει να είναι αριθμοί</string>
     <string name="cant_be_empty">Δεν πρέπει να είναι κενό</string>
+    <string name="numbers_only">Αριθμοί μόνο</string>
     <string name="form_null_msg">Συμπληρώστε όλα τα πεδία</string>
 
     <string-array name="screen_titles">

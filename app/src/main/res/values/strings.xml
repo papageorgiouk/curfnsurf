@@ -16,6 +16,7 @@
     <string name="send">Send</string>
     <string name="error_needs_to_be_number">Needs to be a number</string>
     <string name="cant_be_empty">Can\'t be empty</string>
+    <string name="numbers_only">Numbers only</string>
     <string name="form_null_msg">Please complete all form fields</string>
 
     <string name="about">About</string>
