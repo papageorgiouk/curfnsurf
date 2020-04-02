@@ -39,6 +39,7 @@ class PostCodeFragment : FormFragment(R.layout.post_code_fragment) {
 
         input_post_code.textChanges(true)
             .debounce(200)
+            .drop(1)
             .onEach { viewModel.setPostCodeInput(it.toString()) }
             .launchIn(lifecycleScope)
 
