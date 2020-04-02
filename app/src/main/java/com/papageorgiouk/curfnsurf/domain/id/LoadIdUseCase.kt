@@ -5,6 +5,6 @@ import com.papageorgiouk.curfnsurf.domain.KEY_ID
 
 class LoadIdUseCase(private val storage: Storage) {
 
-    fun execute(): String = storage.loadString(KEY_ID).orEmpty()
+    fun execute(): String? = storage.loadString(KEY_ID)
 
 }

@@ -92,6 +92,8 @@ dependencies {
     //  custom tabs
     implementation 'com.google.androidbrowserhelper:androidbrowserhelper:1.1.0'
 
+    //  leak canary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

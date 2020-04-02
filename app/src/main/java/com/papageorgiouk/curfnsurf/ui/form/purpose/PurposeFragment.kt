@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.papageorgiouk.curfnsurf.R
 import com.papageorgiouk.curfnsurf.data.Purpose
+import com.papageorgiouk.curfnsurf.ui.form.FormFragment
 import kotlinx.android.synthetic.main.purpose_fragment.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class PurposeFragment(val onNext: (() -> Unit)) : Fragment(R.layout.purpose_fragment) {
+class PurposeFragment : FormFragment(R.layout.purpose_fragment) {
 
     private val viewModel: PurposeViewModel by viewModel()
 
@@ -39,7 +39,7 @@ class PurposeFragment(val onNext: (() -> Unit)) : Fragment(R.layout.purpose_frag
 
     private fun onPurposeClicked(purpose: Purpose) {
         viewModel.onPurposeClicked(purpose)
-        onNext.invoke()
+        proceed()
     }
 }
 
