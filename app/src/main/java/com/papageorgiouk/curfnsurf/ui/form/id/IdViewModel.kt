@@ -10,10 +10,16 @@ import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
+import com.papageorgiouk.curfnsurf.domain.id.LoadIdUseCase
+import com.papageorgiouk.curfnsurf.domain.id.SaveIdUseCase
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class IdViewModel(private val formManager: FormManager) : ViewModel() {
+class IdViewModel(
+    private val formManager: FormManager,
+    private val saveIdUseCase: SaveIdUseCase,
+    loadIdUseCase: LoadIdUseCase
+) : ViewModel() {
 
     private val idInputChannel = BroadcastChannel<String>(1)
 
@@ -26,8 +32,15 @@ class IdViewModel(private val formManager: FormManager) : ViewModel() {
     var id: String? = null
         set(value) {
             field = value
-            value?.let { idInputChannel.sendBlocking(value) }
+            value?.let {
+                idInputChannel.sendBlocking(value)
+                saveIdUseCase.execute(it)
+            }
             formManager.id = value
         }
 
+    init {
+        // Set the stored ID
+        id = loadIdUseCase.execute()
+    }
 }

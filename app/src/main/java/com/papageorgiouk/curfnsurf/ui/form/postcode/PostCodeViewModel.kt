@@ -7,8 +7,14 @@ import com.papageorgiouk.curfnsurf.data.FormManager
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.flow.*
+import com.papageorgiouk.curfnsurf.domain.postcode.LoadPostcodeUseCase
+import com.papageorgiouk.curfnsurf.domain.postcode.SavePostcodeUseCase
 
-class PostCodeViewModel(private val formManager: FormManager) : ViewModel() {
+class PostCodeViewModel(
+    private val formManager: FormManager,
+    private val savePostcodeUseCase: SavePostcodeUseCase,
+    private val loadPostcodeUseCase: LoadPostcodeUseCase
+) : ViewModel() {
 
     private val pcInputChannel = BroadcastChannel<String>(1)
 
@@ -19,13 +25,17 @@ class PostCodeViewModel(private val formManager: FormManager) : ViewModel() {
                 is Validity.Invalid -> it.message
                 is Validity.Valid -> null
             }
-        }
+    }
 
     fun setPostCodeInput(input: String) {
         pcInputChannel.sendBlocking(input)
 
-        input.toLongOrNull()?.let { formManager.postCode = it }
+        input.toLongOrNull()?.let {
+            formManager.postCode = it
+            savePostcodeUseCase.execute(it)}
     }
+
+    fun getPostCode() = loadPostcodeUseCase.execute()
 
     private fun validate(input: String): Validity {
         return when {

@@ -39,10 +39,10 @@ class PostCodeFragment : FormFragment(R.layout.post_code_fragment) {
 
         input_post_code.textChanges(true)
             .debounce(200)
-            .drop(1)  //  first one is always empty, triggered on onCreate
             .onEach { viewModel.setPostCodeInput(it.toString()) }
             .launchIn(lifecycleScope)
 
+        input_post_code.setText(viewModel.getPostCode())
     }
 
     override fun onResume() {

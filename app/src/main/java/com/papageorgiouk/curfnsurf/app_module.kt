@@ -21,8 +21,8 @@ val appModule = module {
 
     viewModel { PurposeViewModel(get(), get()) }
 
-    viewModel { IdViewModel(get()) }
+    viewModel { IdViewModel(get(), get(), get()) }
 
-    viewModel { PostCodeViewModel(get()) }
+    viewModel { PostCodeViewModel(get(), get(), get()) }
 
 }
