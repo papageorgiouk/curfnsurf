@@ -2,14 +2,19 @@
 [![codebeat badge](https://codebeat.co/badges/b0fa6ed2-1fa4-401c-9097-52c7ed105b93)](https://codebeat.co/projects/github-com-papageorgiouk-curfnsurf-master)
 
 
-# Curf n Surf
+![icon](app/src/main/res/mipmap-hdpi/ic_launcher_round.png)
+# Curf n Surf  
 COVID-19 is upon us and Cyprus is taking strict measures to contain the virus.  
 
 Everybody should #stayhome but in case of absolutely necessity, people are required to request permission for 
 moving outside using a standard SMS template, to which an automated reply grants or declines permission to do so.  
 "Curf n Surf" automates this process.
 
-The app just creates the message and starts an Intent for the standard SMS handler on the user's phone.
+The app just creates the message and starts an Intent for the standard SMS handler on the user's phone.  
+Available in Greek and English.
+
+# Releases (Android)
+:arrow_double_down: [Download version 1.1.0](https://github.com/papageorgiouk/curfnsurf/releases/download/v1.1.0/app-release.apk)
 
 ## Disclaimer
 This is not an official app and I, the developer, am not affiliated with the government
