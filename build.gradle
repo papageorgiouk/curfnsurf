@@ -11,8 +11,6 @@ buildscript {
         classpath 'com.android.tools.build:gradle:4.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_gradle_version"
 
-        classpath 'com.google.gms:google-services:4.3.4'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
         classpath "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin:8.0.2"
     }
 }

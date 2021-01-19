@@ -89,3 +89,6 @@ lint/tmp/
 
 # release folder
 app/release
+
+# secrets
+secrets.xml

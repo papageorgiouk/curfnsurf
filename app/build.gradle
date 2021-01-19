@@ -47,10 +47,11 @@ android {
 }
 
 ext.versions = [
-        lifecycle  : '2.2.0',
-        coroutines : '1.3.7',
-        koin       : '2.2.0',
-        flowbinding: '0.12.0',
+        lifecycle   : '2.2.0',
+        coroutines  : '1.3.7',
+        koin        : '2.2.0',
+        flowbinding : '0.12.0',
+        appCenter   : '4.1.0'
 ]
 
 dependencies {
@@ -84,19 +85,18 @@ dependencies {
     //  krumbs
     implementation 'com.github.adrielcafe:krumbsview:1.1.3'
 
-    //  crashlytics
-    implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
-
     //  open source notices
     implementation "com.mikepenz:aboutlibraries-core:8.0.2"
 
     //  custom tabs
     implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.1.0'
 
+    //  microsoft app center reporting
+    implementation "com.microsoft.appcenter:appcenter-analytics:${versions.appCenter}"
+    implementation "com.microsoft.appcenter:appcenter-crashes:${versions.appCenter}"
+
     //  leak canary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 }
 
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.mikepenz.aboutlibraries.plugin'
