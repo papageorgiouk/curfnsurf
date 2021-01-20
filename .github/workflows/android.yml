@@ -25,3 +25,9 @@ jobs:
       run: echo APPCENTER_SECRET=\"$APPCENTER_SECRET\" > ./local.properties
     - name: Build with Gradle
       run: ./gradlew assembleDebug
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-debug.apk
+        path: app/build/outputs/apk/debug/app-debug.apk
+
