@@ -15,7 +15,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        AppCenter.start(this, getString(R.string.app_center_secret), Analytics::class.java, Crashes::class.java)
+        AppCenter.start(this, BuildConfig.APPCENTER_SECRET, Analytics::class.java, Crashes::class.java)
 
         startKoin {
             androidLogger()

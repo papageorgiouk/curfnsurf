@@ -13,6 +13,8 @@ android {
         versionCode 2
         versionName "1.1.0"
 
+        buildConfigField ("String", "APPCENTER_SECRET", getAppCenterSecret())
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -44,6 +46,13 @@ android {
     testOptions  {
         unitTests.includeAndroidResources = true
     }
+}
+
+String getAppCenterSecret() {
+    def propFile = rootProject.file("./local.properties")
+    def properties = new Properties()
+    properties.load(new FileInputStream(propFile))
+    return properties['APPCENTER_SECRET']
 }
 
 ext.versions = [
