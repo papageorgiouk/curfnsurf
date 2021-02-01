@@ -20,7 +20,8 @@ class PurposeProvider(val context: Context) {
             Purpose(context.getString(R.string.purpose_5), 5),
             Purpose(context.getString(R.string.purpose_6), 6),
             Purpose(context.getString(R.string.purpose_7), 7),
-            Purpose(context.getString(R.string.purpose_8), 8)
+            Purpose(context.getString(R.string.purpose_8), 8),
+            Purpose(context.getString(R.string.purpose_9), 9)
         )
 
         emit(list)
