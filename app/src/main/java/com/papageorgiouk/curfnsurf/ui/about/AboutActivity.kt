@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.microsoft.appcenter.analytics.Analytics
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.entity.Library
 import com.papageorgiouk.curfnsurf.R
@@ -60,6 +61,10 @@ class AboutActivity : AppCompatActivity(R.layout.about_activity) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        Analytics.trackEvent("About activity")
+    }
 }
 
 class AboutAdapter(val libs: List<Library>, val onClick: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.lifecycleScope
 import cafe.adriel.krumbsview.model.Krumb
+import com.microsoft.appcenter.analytics.Analytics
 import com.papageorgiouk.curfnsurf.data.FormManager
 import com.papageorgiouk.curfnsurf.data.FormState
 import com.papageorgiouk.curfnsurf.ui.*
@@ -98,6 +99,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), FormFragmentList
         val intent= Intent(Intent.ACTION_VIEW, Uri.parse("smsto:$SMS_NUMBER"))
             .apply { putExtra("sms_body", sms) }
 
+        Analytics.trackEvent("SMS sent")
         startActivity(intent)
     }
 

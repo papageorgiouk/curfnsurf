@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.lifecycleScope
+import com.microsoft.appcenter.analytics.Analytics
 import com.papageorgiouk.curfnsurf.R
 import com.papageorgiouk.curfnsurf.ui.form.FormFragment
 import kotlinx.android.synthetic.main.post_code_fragment.*
@@ -30,6 +31,7 @@ class PostCodeFragment : FormFragment(R.layout.post_code_fragment) {
             if (it.actionId == EditorInfo.IME_ACTION_SEND) {
                 if (box_postcode.error != null) return@editorActionEvents false
                 else {
+                    Analytics.trackEvent("Post code set")
                     proceed()
                     return@editorActionEvents true
                 }
