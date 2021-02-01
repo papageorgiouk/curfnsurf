@@ -9,6 +9,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.microsoft.appcenter.AppCenter
+import com.microsoft.appcenter.analytics.Analytics
+import com.microsoft.appcenter.analytics.EventProperties
 import com.papageorgiouk.curfnsurf.R
 import com.papageorgiouk.curfnsurf.data.Purpose
 import com.papageorgiouk.curfnsurf.ui.form.FormFragment
@@ -27,7 +30,10 @@ class PurposeFragment : FormFragment(R.layout.purpose_fragment) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.purposesFlow.collect {
                 recycler_purposes.apply {
-                    adapter = PurposesAdapter(it) { onPurposeClicked(it) }
+                    adapter = PurposesAdapter(it) {
+                        Analytics.trackEvent("Purpose click", mapOf("purpose" to it.number.toString()))
+                        onPurposeClicked(it)
+                    }
                     layoutManager = LinearLayoutManager(this@PurposeFragment.context, RecyclerView.VERTICAL, false)
                     addItemDecoration(DividerItemDecoration(this@PurposeFragment.context, LinearLayoutManager.VERTICAL).apply {
                         setDrawable(resources.getDrawable(R.drawable.divider))

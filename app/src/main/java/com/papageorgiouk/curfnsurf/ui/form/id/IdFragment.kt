@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.lifecycleScope
+import com.microsoft.appcenter.analytics.Analytics
 import com.papageorgiouk.curfnsurf.R
 import com.papageorgiouk.curfnsurf.ui.form.FormFragment
 import kotlinx.android.synthetic.main.id_fragment.*
@@ -28,6 +29,7 @@ class IdFragment : FormFragment(R.layout.id_fragment) {
 
         input_id.editorActionEvents {
             return@editorActionEvents if (it.actionId == EditorInfo.IME_ACTION_NEXT) {
+                Analytics.trackEvent("Id set")
                 proceed()
                 true
             } else false
