@@ -19,6 +19,7 @@
     <string name="cant_be_empty">Can\'t be empty</string>
     <string name="numbers_only">Numbers only</string>
     <string name="form_null_msg">Please complete all form fields</string>
+    <string name="version_placeholder">Version %1$s</string>
 
     <string name="about">About</string>
     <string name="not_official">THIS IS NOT AN OFFICIAL APP</string>

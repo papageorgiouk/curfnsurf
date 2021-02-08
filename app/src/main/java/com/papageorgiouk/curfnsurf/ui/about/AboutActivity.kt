@@ -6,6 +6,7 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.microsoft.appcenter.analytics.Analytics
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.entity.Library
+import com.papageorgiouk.curfnsurf.BuildConfig
 import com.papageorgiouk.curfnsurf.R
 import com.papageorgiouk.curfnsurf.ui.widget.ElasticDragDismissFrameLayout
 import kotlinx.android.synthetic.main.about_activity.*
@@ -76,7 +78,7 @@ class AboutAdapter(val libs: List<Library>, val onClick: () -> Unit) : RecyclerV
         viewType: Int
     ): RecyclerView.ViewHolder {
         val layout = when (viewType) {
-            0 -> LayoutInflater.from(parent.context).inflate(R.layout.about_app, parent, false)
+            0 -> getAboutPage(parent)
             1 -> getLibsPage(parent)
             else -> throw InvalidParameterException()
         }
@@ -88,6 +90,13 @@ class AboutAdapter(val libs: List<Library>, val onClick: () -> Unit) : RecyclerV
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.btn_github?.setOnClickListener { onClick() }
+    }
+
+    private fun getAboutPage(parent: ViewGroup): View {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.about_app, parent, false)
+        view.findViewById<TextView>(R.id.txt_version).text = view.resources.getString(R.string.version_placeholder, BuildConfig.VERSION_NAME)
+
+        return view
     }
 
     private fun getLibsPage(parent: ViewGroup): View {
