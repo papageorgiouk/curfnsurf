@@ -4,12 +4,12 @@
     <string name="purpose_1">Going to a pharmacy, visiting a physician or for blood donation or laboratory testing for Covid-19 or for vaccination at the vaccination centres</string>
     <string name="purpose_2">Going to a shop for essential goods/services, including take away</string>
     <string name="purpose_3">Going to the bank for transactions not available online</string>
-    <string name="purpose_4">Strictly necessary visits to public services or services of the wider public sector and local authorities or private businesses which operate without suspension</string>
+    <string name="purpose_4">Strictly necessary visits to public services or services of the wider public sector and local authorities</string>
     <string name="purpose_5">Helping people who cannot take care of themselves or people who must protect themselves or who are in self-isolation and/or in places of compulsory isolation (quarantine) or visiting a residence</string>
     <string name="purpose_6">Physical activity or individual sports practiced in areas where access is permitted</string>
     <string name="purpose_7">Going to church for mass or for other types of religious worship or for individual prayer or for attending a ceremony, e.g. funeral, wedding, christening</string>
     <string name="purpose_8">Any other reason that may be justified under the lockdown measures (by presenting the necessary proof for each case)</string>
-    <string name="purpose_9">Going to a hair salon, a barbershop, a beauty salon and a tattoo parlour</string>
+    <string name="purpose_9">Going to a business/organisation which operates without suspension, as per the Quarantine Decrees</string>
 
     <string name="ask_purpose">What\s your purpose for leaving home?</string>
     <string name="id_number_hint">ID or Passport</string>
