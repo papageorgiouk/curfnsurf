@@ -14,7 +14,7 @@ The app just creates the message and starts an Intent for the standard SMS handl
 Available in Greek and English.
 
 # Releases (Android)
-:arrow_double_down: [Download version 1.3.0](https://github.com/papageorgiouk/curfnsurf/releases/download/v1.3.0/app-release.apk)
+:arrow_double_down: [Download version 1.4.0](https://github.com/papageorgiouk/curfnsurf/releases/download/1.4.0/app-release.apk)
 
 ## Disclaimer
 This is not an official app and I, the developer, am not affiliated with the government
